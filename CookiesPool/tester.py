@@ -5,7 +5,7 @@
 # software: PyCharm
 from database.dblink import RedisClent
 import json
-from config.configdata import *
+from  config.configdata import *
 import requests
 
 class ValidTester(object):

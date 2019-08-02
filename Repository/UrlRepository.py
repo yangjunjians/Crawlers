@@ -14,7 +14,7 @@ class UrlRepository(object):
 
     def urlPop(self):
         url = self.highlevel_db.popurl()
-        if type(url) == None:
+        if not url:
             url = self.lowlevel_db.popurl()
         return  url
 

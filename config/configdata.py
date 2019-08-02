@@ -52,7 +52,7 @@ TESTURL_MAP ={
 weibo_info = {
     'username':'无',
     'authentication':'无',
-    'vip_level':'无',
+    'vip_level':0,
     'gender':'无',
     'introduction':'无',
     'followers_num':0,

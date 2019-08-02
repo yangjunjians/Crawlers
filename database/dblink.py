@@ -6,7 +6,7 @@
 
 import random
 import redis
-from CookiesPool.config import *
+from config.configdata import *
 import  pymysql
 
 class RedisClent(object):

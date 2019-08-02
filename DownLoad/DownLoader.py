@@ -23,12 +23,16 @@ class weiboDownloader(PageDownloader):
     def download(self,url):
 
         cookies = json.loads(self.cookies_db.random())
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+        }
         # cookies = {'LT': '1562599953', 'SUB': '_2A25wJxJBDeRhGeFP7FcY9SbIwjiIHXVTVQSJrDV_PUJbm9B-LRatkW9NQR8eS0TyzrX5K4nQcggCBnfYL_zmpgb1', 'SUBP': '0033WrSXqPxfM725Ws9jqgMF55529P9D9Whp-Ia.AXNpTLPF85nhG5UZ5NHD95QNeKMf1K-RSh.XWs4DqcjMi--NiK.Xi-2Ri--ciKnRi-zN1K-ESKn4eozRSBtt', 'login': '9da7cd806ada2c22779667e8e1c039c2'}
         try:
-            response = requests.get(url, cookies=cookies, timeout=5, allow_redirects=False)
+            response = requests.get(url, headers = headers,cookies=cookies, timeout=5, allow_redirects=False)
             if response.status_code == 200:
                 return {
                     'status':1,
+                    'url':response.url,
                     'text':response.text
                 }
             else :

@@ -80,7 +80,7 @@ class WeiboCookies():
         uid_url = 'https://passport.weibo.com/wbsso/login?ticket={}&ssosavestate={}&callback=sinaSSOController.doCrossDomainCallBack&scriptId=ssoscript0&client=ssologin.js(v1.4.19)&_={}'.format(ticket,ssosavestate,self.get_timestamp())
         data = self.session.get(uid_url).text #请求获取uid
         uid = re.findall(r'"uniqueid":"(.*?)"',data)[0]
-        print(uid)
+        # print(uid)
         home_url = 'https://weibo.com/u/{}/home?wvr=5&lf=reg'.format(uid) #请求首页
         html = self.session.get(home_url)
         html.encoding = 'utf-8'
