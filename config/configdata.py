@@ -61,5 +61,7 @@ weibo_info = {
     'city':'未知',
     'birthday':'无',
     'domain_name':'未知',
-    'ID':'未知'
+    'ID':'未知',
+    'url':'无',
+    'blogger_type':'未知'
 }
