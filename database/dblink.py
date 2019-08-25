@@ -93,7 +93,6 @@ class RedisClent(object):
     def addUrl(self,url):
         """
         添加url进队列
-        :param urllevel: url优先级
         :param url: url
         :return:
         """
@@ -108,6 +107,7 @@ class RedisClent(object):
         :return:
         """
         # listname = self.Listname().get(urllevel)
+        print(self.Listname(),':',self.db.llen(self.Listname()))
         return self.db.rpop(self.Listname())
 
 class MySQLClient(object):

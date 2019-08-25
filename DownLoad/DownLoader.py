@@ -32,12 +32,13 @@ class weiboDownloader(PageDownloader):
             if response.status_code == 200:
                 return {
                     'status':1,
-                    'url':response.url,
+                    'url':url,
                     'text':response.text
                 }
             else :
                 return {
                     'status':2,
+                    'url': url,
                     'text':response.status_code
                 }
         except ConnectionError as e:
@@ -45,5 +46,5 @@ class weiboDownloader(PageDownloader):
 
 if __name__ == '__main__':
     downloader = weiboDownloader()
-    page = downloader.download('https://d.weibo.com/')
+    page = downloader.download('https://weibo.com/hejiong?refer_flag=1087030701_2975_1003_0')
     print(page.get('text'))

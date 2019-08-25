@@ -15,15 +15,15 @@ if __name__ == '__main__':
     downloader = weiboDownloader()
     urlRepo = UrlRepository('weibo')
 
-    # tester = weiboValidTester()
-    # tester.run()
-    #
-    # generatotr = weiboCookiesGenerator()
-    # generatotr.run()
+    tester = weiboValidTester()
+    tester.run()
+    # #
+    generatotr = weiboCookiesGenerator()
+    generatotr.run()
 
     # initPage = downloader.download(start_url)
     # Parser.init_url_repo(initPage)
-
+    #
     while(True):
         url = urlRepo.urlPop()
         if url:

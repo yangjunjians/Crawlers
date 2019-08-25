@@ -28,28 +28,37 @@ class weiboPageParser(object):
         :return:
         """
         text = page.get('text')
-        try:
-            detail_url_html = re.search(r'\{(.*?)"domid":"Pl_Core_F4RightUserList__4"(.*?)\}', text)
-            if detail_url_html:
-                data = json.loads(detail_url_html.group(), strict=False)
-                html = etree.HTML(str(data.get('html')))
-                urllist_selectors =html.xpath('//dt[@class="mod_pic"]/a/@href')
-                # 获取详细页url
-                for urllist_selector in urllist_selectors:
-                    detail_url = 'https:' + urllist_selector
-                    # print(detail_url)
-                    self.lowlevel_db.addUrl(detail_url)
-                nexturl_selector = html.xpath('//a[@class="page next S_txt1 S_line1 page_dis"]')
-                if not nexturl_selector:
-                    nexturl = html.xpath('//a[@class="page next S_txt1 S_line1"]/@href')
-                    next_url = 'https://d.weibo.com' + nexturl[0]
-                    # print(next_url)
-                    self.highlevel_db.addUrl(next_url)
-                else:
-                    print('已经是最后一页')
-        except Exception as e:
-            # print(str(e))
-            traceback.print_exc()
+        if text:
+            try:
+                detail_url_html = re.search(r'\{(.*?)"domid":"Pl_Core_F4RightUserList__4"(.*?)\}', text)
+                if detail_url_html:
+                    # print(detail_url_html.group())
+                    data = json.loads(detail_url_html.group(), strict=False)
+                    html = etree.HTML(str(data.get('html')))
+                    #判断返回的页面内容是否为空
+                    error_selector = html.xpath('//div[@class="WB_empty"]')
+                    if len(error_selector) == 0:  #内容不为空
+                        urllist_selectors =html.xpath('//dt[@class="mod_pic"]/a/@href')
+                        # 获取详细页url
+                        for urllist_selector in urllist_selectors:
+                            detail_url = 'https:' + urllist_selector
+                            # print(detail_url)
+                            self.lowlevel_db.addUrl(detail_url)
+                        nexturl_selector = html.xpath('//a[@class="page next S_txt1 S_line1"]/@href')
+                        # print(nexturl_selector)
+                        if  nexturl_selector :
+                            next_url = 'https://d.weibo.com' + nexturl_selector[0]
+                            # print(next_url)
+                            self.highlevel_db.addUrl(next_url)
+                        else:
+                            print('已经是最后一页')
+                    else:#内容为空
+                        print(data.get('html'))
+                        self.highlevel_db.addUrl(page.get('url'))
+            except Exception as e:
+                traceback.print_exc()
+        else :
+            print(text)
 
     def processDetailPage(self, page):
         """
@@ -109,7 +118,8 @@ class weiboPageParser(object):
                 if second_part:
                     data = json.loads(second_part.group(), strict=False)
                     html = etree.HTML(str(data.get('html')))
-                    selectors = html.xpath('//strong[@class="W_f14"]')
+                    selectors = html.xpath('//a[@class="t_link S_txt1"]/strong')
+                    # print(selectors)
                     if selectors:
                         # 关注数
                         self.info_data['followers_num'] = selectors[0].text
@@ -125,7 +135,7 @@ class weiboPageParser(object):
                     select_list = html.xpath('//span[@class="item_text W_fl"]')
                     for select in select_list:
                         if select.text:
-                            if re.search(r'^((?!毕业于|简介：|个性域名：|博客地址：).)*$', select.text.strip()) and len(select.text.strip()) >0:
+                            if re.search(r'^((?!毕业于|简介：|个性域名：|博客地址：|友情链接).)*$', select.text.strip()) and len(select.text.strip()) >0:
                                 if re.search(r'.*月.*', select.text.strip()):
                                     self.info_data['birthday'] = select.text.strip()
                                 else:
@@ -134,12 +144,11 @@ class weiboPageParser(object):
             except Exception as e:
                 print(str(e))
                 traceback.print_exc()
-            self.mysqlclent.update('weibo_blogger', self.info_data)
+            self.mysqlclent.insert('weibo_blogger', self.info_data)
         else:
-            print('text',text)
-            # print('url',pageurl)
-
-
+            # print('text',text)
+            print('url',pageurl)
+            self.lowlevel_db.addUrl(pageurl)
     def get_info_data(self):
         for data in self.info_data.items():
             print(data)
