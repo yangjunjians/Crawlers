@@ -65,3 +65,109 @@ weibo_info = {
     'url':'无',
     'blogger_type':'未知'
 }
+
+team_data = {
+    'id':'',
+    'tid':'',
+    'tname':'',
+    'tlogo':''
+}
+
+schedule_data = {
+    'match_id': '',
+    'date': '',
+    'time': '',
+    'status': '',
+    'round_cn': '',
+    'title': '',
+    'city': '',
+    'live_url': '',
+    'news_url': '',
+    'beitai_team1_tid': '',
+    'beitai_team2_tid': '',
+    'team1_score': 0,
+    'team2_score': 0,
+    'team1_score1': 0,
+    'team1_score2': 0,
+    'team1_score3': 0,
+    'team1_score4': 0,
+    'team1_score5': 0,
+    'team1_score6': 0,
+    'team1_score7': 0,
+    'team2_score1': 0,
+    'team2_score2': 0,
+    'team2_score3': 0,
+    'team2_score4': 0,
+    'team2_score5': 0,
+    'team2_score6': 0,
+    'team2_score7': 0
+}
+
+
+
+player_matchdata = {
+    'ScheduleID': '',
+    'TeamID': '',
+    'PlayerID': '',
+    'CNName': '',
+    'JerseyNumber': 0,
+    'PositionDescription': '',
+    'Points': 0,
+    'Rebounds': 0,
+    'ReboundsOffensive': 0,
+    'ReboundsDefensive': 0,
+    'Assists': 0,
+    'Steals': 0,
+    'Blocked': 0,
+    'Dunks': 0,
+    'Turnovers': 0,
+    'FastBreaks': 0,
+    'FieldGoals': 0,
+    'FieldGoalsAttempted': 0,
+    'FieldGoalsPercentage': 0.0,
+    'ThreePointGoals': 0,
+    'ThreePointAttempted': 0,
+    'ThreePointPercentage': 0.0,
+    'FreeThrows': 0,
+    'FreeThrowsAttempted': 0,
+    'FreeThrowsPercentage': 0.0,
+    'PersonalFouls': 0,
+    'FoulsOffensive': 0,
+    'FoulsDefensive': 0,
+    'BlocksReceived': 0,
+    'FoulsReceived': 0,
+    'PlusMinus': 0,
+    'Seconds': 0
+}
+
+
+team_matchdata = {
+    'ScheduleID': '',
+    'TeamID': '',
+    'Points': 0,
+    'Rebounds': 0,
+    'ReboundsOffensive': 0,
+    'ReboundsDefensive': 0,
+    'Assists': 0,
+    'Steals': 0,
+    'Blocked': 0,
+    'Dunks': 0,
+    'Turnovers': 0,
+    'FastBreaks': 0,
+    'FastBreakPoints':0,
+    'FastBreakAttempted':0,
+    'FieldGoals': 0,
+    'FieldGoalsAttempted': 0,
+    'FieldGoalsPercentage': 0.0,
+    'ThreePointGoals': 0,
+    'ThreePointAttempted': 0,
+    'ThreePointPercentage': 0.0,
+    'FreeThrows': 0,
+    'FreeThrowsAttempted': 0,
+    'FreeThrowsPercentage': 0.0,
+    'PersonalFouls': 0,
+    'FoulsOffensive': 0,
+    'FoulsDefensive': 0,
+    'BlocksReceived': 0,
+    'FoulsReceived': 0
+}

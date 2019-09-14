@@ -176,15 +176,38 @@ class MySQLClient(object):
         finally:
             cursor.close()
 
-    def select(self,table):
+    def select(self,table,col):
         cursor = self.conn.cursor()
-        sql = 'select * from {table}'.format(table=table)
+        result = []
+        sql = 'select {col} from {table}'.format(col=col,table=table)
         try:
             if cursor.execute(sql):
                 row = cursor.fetchone()
                 while row:
-                    print('ROW:',row)
+                    # print('ROW:',row)
+
+                    result.append(''.join(row))
                     row = cursor.fetchone()
+                return  result
+        except Exception as e:
+            print('select Failed')
+            print("error：", str(e))
+        finally:
+            cursor.close()
+
+    def select_where(self,table,condition):
+        cursor = self.conn.cursor()
+        result = []
+        sql = 'select * from {table} where {condition}'.format(table=table,condition=condition)
+        # print(sql)
+        try:
+            if cursor.execute(sql):
+                row = cursor.fetchone()
+                while row:
+                    # print('ROW:',row)
+                    result.append(row)
+                    row = cursor.fetchone()
+                return  result
         except Exception as e:
             print('select Failed')
             print("error：", str(e))

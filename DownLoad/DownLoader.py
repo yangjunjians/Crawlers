@@ -44,6 +44,8 @@ class weiboDownloader(PageDownloader):
         except ConnectionError as e:
             print('发生异常',e.args)
 
+
+
 if __name__ == '__main__':
     downloader = weiboDownloader()
     page = downloader.download('https://weibo.com/hejiong?refer_flag=1087030701_2975_1003_0')
